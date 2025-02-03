@@ -40,10 +40,10 @@ product_data = pd.DataFrame({
     })
 
 #row 2
-c1, c2 = st.columns([4,2], border=True)#use list for ratio
+c1, c2 = st.columns([4,2])#use list for ratio
 with c1.container(height=200):
     st.subheader("Waiting time (in min) at cash desk")
-    st.bar_chart(time_data, x="Time", y="Waiting Time", height = 200)   
+    st.bar_chart(time_data, x="Time", y="Waiting Time")   
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(time_data["Time"], time_data["Waiting Time"])
     #ax.set_xlabel("Time")
@@ -51,7 +51,7 @@ with c1.container(height=200):
     #st.pyplot(fig)
 with c2.container(height=200):
     st.subheader("Product Sales and Forecast")
-    st.line_chart(sales_data, x="Month", y="Sales", height = 200)
+    st.line_chart(sales_data, x="Month", y="Sales")
     #fig, ax = plt.subplots() 
     #ax.plot(sales_data["Month"], sales_data["Sales"], marker='o')
     #ax.set_xlabel("Month")
@@ -60,10 +60,10 @@ with c2.container(height=200):
 
 #row 3
 
-c3, c4 = st.columns([4,2], border=True)
+c3, c4 = st.columns([4,2])
 with c3.container(height=200):
     st.subheader("Customers per Day")
-    st.bar_chart(customer_data, x="Time", y="Customers", height = 200)
+    st.bar_chart(customer_data, x="Time", y="Customers")
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(customer_data["Time"], customer_data["Customers"])
     #ax.set_xlabel("Time")
@@ -72,7 +72,7 @@ with c3.container(height=200):
 
 with c4.container(height=200):
     st.subheader("Product Variation List")
-    st.dataframe(product_data, height = 200)
+    st.dataframe(product_data)
 
 #template leftover
 #    @st.cache_data
