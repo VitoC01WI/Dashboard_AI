@@ -40,10 +40,10 @@ product_data = pd.DataFrame({
     })
 
 #row 2
-c1, c2 = st.columns([3,1], border=True)#use list for ratio
+c1, c2 = st.columns([4,2], border=True)#use list for ratio
 with c1:
     st.subheader("Waiting time (in min) at cash desk")
-    fig, ax = plt.subplots(figsize=(15, 4))  # Define aspect ratio
+    fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     ax.bar(time_data["Time"], time_data["Waiting Time"])
     ax.set_xlabel("Time")
     ax.set_ylabel("Waiting Time (min)")
@@ -57,10 +57,10 @@ with c2:
     st.pyplot(fig)
 
 #row 3
-c3, c4 = st.columns([3,1], border=True)
+c3, c4 = st.columns([4,2], border=True)
 with c3:
     st.subheader("Customers per Day")
-    fig, ax = plt.subplots(figsize=(15, 4))  # Define aspect ratio
+    fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     ax.bar(customer_data["Time"], customer_data["Customers"])
     ax.set_xlabel("Time")
     ax.set_ylabel("Customers")
