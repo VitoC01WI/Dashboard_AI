@@ -12,7 +12,7 @@ import functool as fnc
 # Set up Streamlit page configuration
 st.set_page_config(
     page_title="Interactive Dashboards with GPT Chat",
-    layout="centered",
+    layout="wide",
     #page_icon="🤖",
 )
 
@@ -40,27 +40,27 @@ product_data = pd.DataFrame({
     })
 
 #row 2
-c1, c2 = st.columns([3,2], border=True)#use list for ratio
+c1, c2 = st.columns([3,1], border=True)#use list for ratio
 with c1:
     st.subheader("Waiting time (in min) at cash desk")
-    fig, ax = plt.subplots(figsize=(8, 4))  # Define aspect ratio
+    fig, ax = plt.subplots(figsize=(15, 4))  # Define aspect ratio
     ax.bar(time_data["Time"], time_data["Waiting Time"])
     ax.set_xlabel("Time")
     ax.set_ylabel("Waiting Time (min)")
     st.pyplot(fig)
 with c2:
     st.subheader("Product Sales and Forecast")
-    fig, ax = plt.subplots(figsize=(6, 4))  # Define aspect ratio
+    fig, ax = plt.subplots()  # Define aspect ratio
     ax.plot(sales_data["Month"], sales_data["Sales"], marker='o')
     ax.set_xlabel("Month")
     ax.set_ylabel("Sales (€)")
     st.pyplot(fig)
 
 #row 3
-c3, c4 = st.columns([3,2], border=True)
+c3, c4 = st.columns([3,1], border=True)
 with c3:
     st.subheader("Customers per Day")
-    fig, ax = plt.subplots(figsize=(8, 4))  # Define aspect ratio
+    fig, ax = plt.subplots(figsize=(15, 4))  # Define aspect ratio
     ax.bar(customer_data["Time"], customer_data["Customers"])
     ax.set_xlabel("Time")
     ax.set_ylabel("Customers")
