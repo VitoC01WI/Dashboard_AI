@@ -12,7 +12,7 @@ import functool as fnc
 # Set up Streamlit page configuration
 st.set_page_config(
     page_title="Interactive Dashboards with GPT Chat",
-    layout="wide",
+    #layout="wide",
     #page_icon="🤖",
 )
 
