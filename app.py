@@ -12,7 +12,7 @@ import functool as fnc
 # Set up Streamlit page configuration
 st.set_page_config(
     page_title="Interactive Dashboards with GPT Chat",
-    #layout="wide",
+    layout="wide",
     #page_icon="🤖",
 )
 
@@ -41,16 +41,16 @@ product_data = pd.DataFrame({
 
 #row 2
 c1, c2 = st.columns([4,2])#use list for ratio
-with c1.container(height=300):
-    st.subheader("Waiting time (in min) at cash desk")
+with c1.container(height=250):
+    st.markdown("Waiting time (in min) at cash desk")
     st.bar_chart(time_data, x="Time", y="Waiting Time", height = 200)   
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(time_data["Time"], time_data["Waiting Time"])
     #ax.set_xlabel("Time")
     #ax.set_ylabel("Waiting Time (min)")
     #st.pyplot(fig)
-with c2.container(height=300):
-    st.subheader("Product Sales and Forecast")
+with c2.container(height=250):
+    st.markdown("Product Sales and Forecast")
     st.line_chart(sales_data, x="Month", y="Sales", height = 200)
     #fig, ax = plt.subplots() 
     #ax.plot(sales_data["Month"], sales_data["Sales"], marker='o')
@@ -61,8 +61,8 @@ with c2.container(height=300):
 #row 3
 
 c3, c4 = st.columns([4,2])
-with c3.container(height=300):
-    st.subheader("Customers per Day")
+with c3.container(height=250):
+    st.markdown("Customers per Day")
     st.bar_chart(customer_data, x="Time", y="Customers", height = 200)
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(customer_data["Time"], customer_data["Customers"])
@@ -70,8 +70,8 @@ with c3.container(height=300):
     #ax.set_ylabel("Customers")
     #st.pyplot(fig)
 
-with c4.container(height=300):
-    st.subheader("Product Variation List")
+with c4.container(height=250):
+    st.markdown("Product Variation List")
     st.dataframe(product_data, height = 200)
 
 #template leftover
@@ -150,7 +150,7 @@ with c4.container(height=300):
 #    st.altair_chart(chart, use_container_width=True)
 
 # AI Recommender Section
-st.subheader("GPT Chat Recommender")
+st.markdown("GPT Chat Recommender")
 
 #st.write(
 #    "Upload a document below and ask a question about it – GPT will answer! "
