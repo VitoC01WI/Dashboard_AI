@@ -11,7 +11,7 @@ import functool as fnc
 # Set up Streamlit page configuration
 st.set_page_config(
     page_title="Interactive Dashboards with GPT Chat",
-    layout="wide",
+    layout="centered",
     #page_icon="🤖",
 )
 
@@ -50,7 +50,7 @@ with c2:
 #row 3
 c3, c4 = st.columns(2)
 with c3:
-    st.subheader("# Customers per Day")
+    st.subheader("Customers per Day")
     st.bar_chart(customer_data, x="Time", y="Customers")
 
 with c4:
