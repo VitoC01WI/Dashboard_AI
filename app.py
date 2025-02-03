@@ -41,7 +41,7 @@ product_data = pd.DataFrame({
 
 #row 2
 c1, c2 = st.columns([4,2])#use list for ratio
-with c1.container(height=200):
+with c1.container(height=250):
     st.subheader("Waiting time (in min) at cash desk")
     st.bar_chart(time_data, x="Time", y="Waiting Time", height = 200)   
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
@@ -61,7 +61,7 @@ with c2.container(height=200):
 #row 3
 
 c3, c4 = st.columns([4,2])
-with c3.container(height=200):
+with c3.container(height=250):
     st.subheader("Customers per Day")
     st.bar_chart(customer_data, x="Time", y="Customers", height = 200)
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
