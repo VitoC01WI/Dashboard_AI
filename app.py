@@ -39,7 +39,7 @@ product_data = pd.DataFrame({
     })
 
 #row 2
-c1, c2 = st.columns(2)#use list for ratio
+c1, c2 = st.columns([3,2], border=True)#use list for ratio
 with c1:
     st.subheader("Waiting time (in min) at cash desk")
     st.bar_chart(time_data, x="Time", y="Waiting Time")
@@ -48,7 +48,7 @@ with c2:
     st.line_chart(sales_data, x="Month", y="Sales")
 
 #row 3
-c3, c4 = st.columns(2)
+c3, c4 = st.columns([3,2], border=True)
 with c3:
     st.subheader("Customers per Day")
     st.bar_chart(customer_data, x="Time", y="Customers")
