@@ -67,31 +67,18 @@ c1, c2 = st.columns([3,2])#use list for ratio, 3,2 will make 2 columns with rati
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
     st.bar_chart(time_data,x='Time', height = 220)   
-    #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
-    #ax.bar(time_data["Time"], time_data["Waiting Time"])
-    #ax.set_xlabel("Time")
-    #ax.set_ylabel("Waiting Time (min)")
-    #st.pyplot(fig)
+
 with c2.container(height=260):
     st.markdown("Product Sales and Forecast")
     st.line_chart(sales_data, x="Month", height = 220)
-    #fig, ax = plt.subplots() 
-    #ax.plot(sales_data["Month"], sales_data["Sales"], marker='o')
-    #ax.set_xlabel("Month")
-    #ax.set_ylabel("Sales (€)")
-    #st.pyplot(fig)
+
 
 #row 3
-
 c3, c4 = st.columns([3,2])
 with c3.container(height=260):
     st.markdown("Customers per Day")
-    st.bar_chart(customer_data, x="Time", height = 220)
-    #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
-    #ax.bar(customer_data["Time"], customer_data["Customers"])
-    #ax.set_xlabel("Time")
-    #ax.set_ylabel("Customers")
-    #st.pyplot(fig)
+    st.bar_chart(customer_data, x="Time", height = 220,color = ["#1f77b4", "#ff7f0e"])
+
 
 with c4.container(height=260):
     st.markdown("Product Variation List")
@@ -175,11 +162,6 @@ with c4.container(height=260):
 # AI Recommender Section
 st.markdown("GPT Chat Recommender")
 
-#st.write(
-#    "Upload a document below and ask a question about it – GPT will answer! "
-#    "You need to provide an OpenAI API key, which you can get "
-#    "[here](https://platform.openai.com/account/api-keys)."
-#)
 
 # import API key from secrets
 openai_api_key = st.secrets["api_key"]
@@ -203,6 +185,7 @@ if question:
     time_data_csv=time_data.to_csv(index=False)
     sales_data_csv=sales_data.to_csv(index=False)
     product_data_csv=product_data.to_csv(index=False)
+    #you may need to modify the message to guide how chatgpt will analyse the data
     messages = [
         {
             "role": "user",
