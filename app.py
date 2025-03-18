@@ -66,11 +66,11 @@ target_waiting_time = 6
 c1, c2 = st.columns([3,2])#use list for ratio, 3,2 will make 2 columns with ratio 3:2
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
-    st.bar_chart(time_data,x='Time', height = 220)   
+    st.bar_chart(time_data,x='Time', height = 220,color = ["#1f77b4", "#ff7f0e"])   
 
 with c2.container(height=260):
     st.markdown("Product Sales and Forecast")
-    st.line_chart(sales_data, x="Month", height = 220)
+    st.line_chart(sales_data, x="Month", height = 220,color = ["#1f77b4", "#ff7f0e"])
 
 
 #row 3
@@ -84,7 +84,7 @@ with c4.container(height=260):
     st.markdown("Product Variation List")
     st.dataframe(product_data, height = 220)
 
-#template leftover
+#template leftover for filters
 #    @st.cache_data
 #    def get_gdp_data():
 #        DATA_FILENAME = Path(__file__).parent / "data/gdp_data.csv"
