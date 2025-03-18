@@ -5,6 +5,6 @@ from pathlib import Path
 import altair as alt
 
 @st.cache_data
-def get_data():
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
+def get_data(data_filename):
+    DATA_FILENAME = Path(__file__).parent/f'data/{data_filename}'
     return pd.read_csv(DATA_FILENAME)

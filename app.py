@@ -20,18 +20,21 @@ st.set_page_config(
 #st.markdown(f"**Today:** {datetime.now().strftime('%d %B %Y, %I:%M%p')}", unsafe_allow_html=True)
 #dummy time
 st.markdown(f"**Today: 30 May 2024, 6:15pm**", unsafe_allow_html=True)
-# formating layout
+# making the top row of metrics
 comp.metric_row()
 
 # load data
-df = fnc.get_data()
+#df = fnc.get_data(data_filename="movies.csv")
 
 #dummy data
 time_data = pd.DataFrame({
     "Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"],
-    "Average waiting time (in min) at cash desk": [1,2,2,4,3,6,6,6,10,11,14,0,0,0,0],
+    "Average waiting time": [1,2,2,4,3,6,6,6,10,11,14,0,0,0,0],
     "Forecas": [0,0,0,0,0,0,0,0,0,0,0,13,15,6,3]
 })
+time_order = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
+time_data["Time"] = pd.Categorical(time_data["Time"], categories=time_order, ordered=True)
+time_data = time_data.sort_values("Time")
 
 # separate data and forecast for plotting
 #time_data["Average waiting time (in min) at cash desk"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
@@ -48,10 +51,12 @@ sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "
 #sales_data.drop(columns=["Sales"], inplace=True)
 
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
-                              , "Customers": [10,12,17,30,23,40,39,40,70,80,100,90,30,20,15]})
-customer_data["# customer"] = customer_data["Customers"].where(~customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-customer_data["Forecast"] = customer_data["Customers"].where(customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-customer_data.drop(columns=["Customers"], inplace=True)
+                              , "# customers": [10,12,17,30,23,40,39,40,70,80,100,0,0,0,0]
+                              , "Forecast": [0,0,0,0,0,0,0,0,0,0,0,90,30,20,15]
+                              })
+#customer_data["# customer"] = customer_data["Customers"].where(~customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+#customer_data["Forecast"] = customer_data["Customers"].where(customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+#customer_data.drop(columns=["Customers"], inplace=True)
 
 product_data = pd.DataFrame({
         "Items": ["Banana", "Milk", "Chocolate", "Cheese"],
@@ -181,7 +186,7 @@ st.markdown("GPT Chat Recommender")
 #)
 
 # Ask for OpenAI API key
-openai_api_key = st.text_input("OpenAI API Key", type="password")
+openai_api_key = st.secrets["api_key"]
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
