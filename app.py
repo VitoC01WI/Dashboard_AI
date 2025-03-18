@@ -183,6 +183,7 @@ st.markdown("GPT Chat Recommender")
 
 # Ask for OpenAI API key
 openai_api_key = st.secrets["api_key"]
+st.markdown(openai_api_key)
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
