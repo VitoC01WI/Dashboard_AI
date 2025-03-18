@@ -87,6 +87,48 @@ with c4.container(height=260):
     st.markdown("Product Variation List")
     st.dataframe(product_data, height = 220)
 
+# AI Recommender Section
+st.markdown("GPT Chat Recommender")
+
+# import API key from secrets
+openai_api_key = st.secrets["api_key"]
+
+client = OpenAI(api_key=openai_api_key)
+
+# Text area for user's question
+question = st.text_area(
+    "Now ask a question about the document!",
+    placeholder="Can you give me a short summary?",
+    #disabled=not uploaded_file,
+)
+
+if question:
+    customer_data_csv=customer_data.to_csv(index=False)
+    time_data_csv=time_data.to_csv(index=False)
+    sales_data_csv=sales_data.to_csv(index=False)
+    product_data_csv=product_data.to_csv(index=False)
+    #you may need to modify the message to guide how chatgpt will analyse the data
+    messages = [
+        {
+            "role": "user",
+            "content": f"Here's 4 csv tables: {customer_data_csv},{time_data_csv},{sales_data_csv},{product_data_csv} \n\n---\n\n {question}",
+        }
+    ]
+
+    # Generate an answer using the OpenAI API
+    stream = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        stream=True,
+    )
+
+    # Display streamed response
+    st.write("**Answer:**")
+    for response in stream:
+        st.write(response.choices[0].delta.content, end="")
+
+
+        
 #template leftover for filters
 #    @st.cache_data
 #    def get_gdp_data():
@@ -161,44 +203,3 @@ with c4.container(height=260):
 #        .properties(height=320)
 #    )
 #    st.altair_chart(chart, use_container_width=True)
-
-# AI Recommender Section
-st.markdown("GPT Chat Recommender")
-
-
-# import API key from secrets
-openai_api_key = st.secrets["api_key"]
-
-client = OpenAI(api_key=openai_api_key)
-
-# Text area for user's question
-question = st.text_area(
-    "Now ask a question about the document!",
-    placeholder="Can you give me a short summary?",
-    #disabled=not uploaded_file,
-)
-
-if question:
-    customer_data_csv=customer_data.to_csv(index=False)
-    time_data_csv=time_data.to_csv(index=False)
-    sales_data_csv=sales_data.to_csv(index=False)
-    product_data_csv=product_data.to_csv(index=False)
-    #you may need to modify the message to guide how chatgpt will analyse the data
-    messages = [
-        {
-            "role": "user",
-            "content": f"Here's 4 csv tables: {customer_data_csv},{time_data_csv},{sales_data_csv},{product_data_csv} \n\n---\n\n {question}",
-        }
-    ]
-
-    # Generate an answer using the OpenAI API
-    stream = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        stream=True,
-    )
-
-    # Display streamed response
-    st.write("**Answer:**")
-    for response in stream:
-        st.write(response.choices[0].delta.content, end="")
