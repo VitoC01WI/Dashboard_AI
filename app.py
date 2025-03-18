@@ -8,6 +8,7 @@ from pathlib import Path
 from datetime import datetime
 import comp
 import functool as fnc
+import numpy as np
 
 # Set up Streamlit page configuration
 st.set_page_config(
@@ -38,8 +39,8 @@ time_data["Time"] = pd.Categorical(time_data["Time"], categories=time_order, ord
 time_data = time_data.sort_values("Time")
 
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
-                           "Sales 2024": [280.000, 350.000, 370.000, 400.000, 0, 0, 0, 0, 0],
-                           "Sales forecast 2024": [0, 0, 0, 0, 350.000, 330.000, 220.000, 250.000, 320.000]
+                           "Sales 2024": [280.000, 350.000, 370.000, 400.000, np.nan, np.nan, np.nan, np.nan, np.nan],
+                           "Sales forecast 2024": [np.nan, np.nan, np.nan, 400.000, 350.000, 330.000, 220.000, 250.000, 320.000]
                            })
 time_order = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
 sales_data["Month"] = pd.Categorical(sales_data["Month"], categories=time_order, ordered=True)
