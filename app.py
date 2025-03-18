@@ -70,12 +70,22 @@ c1, c2 = st.columns([3,2])#use list for ratio, 3,2 will make 2 columns with rati
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
     st.bar_chart(time_data,x='Time', height = 220,color = ["#1f77b4", "#ff7f0e"])   
-    fig, ax = plt.subplots()
-    ax.bar(time_data['Time'], time_data['Forecast'])
-    ax.axhline(y=6, color='r', linestyle='--')  # Horizontal line at y = 6
+    import plotly.graph_objects as go
+    
+    fig = go.Figure(data=[
+        go.Bar(x=time_data['Time'], y=time_data['Forcast'])
+    ])
 
-    # Display the modified plot with the horizontal line
-    st.pyplot(fig)
+    # Add horizontal line
+    fig.add_shape(
+        type="line",
+        x0=0, x1=len(time_data)-1,
+        y0=6, y1=6,
+        line=dict(color="red", width=2, dash="dash")
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
 with c2.container(height=260):
     st.markdown("Product Sales and Forecast")
     st.line_chart(sales_data, x="Month", height = 220,color = ["#1f77b4", "#ff7f0e"])
