@@ -73,7 +73,7 @@ with c1.container(height=260):
     import plotly.graph_objects as go
     
     fig = go.Figure(data=[
-        go.Bar(x=time_data['Time'], y=time_data['Forcast'])
+        go.Bar(x=time_data['Time'], y=time_data['Forecast'])
     ])
 
     # Add horizontal line
