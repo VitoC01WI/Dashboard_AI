@@ -32,31 +32,26 @@ time_data = pd.DataFrame({
     "Average waiting time": [1,2,2,4,3,6,6,6,10,11,14,0,0,0,0],
     "Forecas": [0,0,0,0,0,0,0,0,0,0,0,13,15,6,3]
 })
+#this code will sort the time in order, if x axis is numerical, this should not be necessary
 time_order = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
 time_data["Time"] = pd.Categorical(time_data["Time"], categories=time_order, ordered=True)
 time_data = time_data.sort_values("Time")
-
-# separate data and forecast for plotting
-#time_data["Average waiting time (in min) at cash desk"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-#time_data["Forecast"] = time_data["Waiting Time"].where(time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-#time_data.drop(columns=["Waiting Time"], inplace=True)
-
 
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
                            "Sales 2024": [280.000, 350.000, 370.000, 400.000, 0, 0, 0, 0, 0],
                            "Sales forecast 2024": [0, 0, 0, 0, 350.000, 330.000, 220.000, 250.000, 320.000]
                            })
-#sales_data["Sales 2024"] = sales_data["Sales"].where(~sales_data["Month"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
-#sales_data["Sales forecast 2024"] = sales_data["Sales"].where(sales_data["Month"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
-#sales_data.drop(columns=["Sales"], inplace=True)
+time_order = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+sales_data["Time"] = pd.Categorical(sales_data["Time"], categories=time_order, ordered=True)
+sales_data = sales_data.sort_values("Time")
 
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
                               , "# customers": [10,12,17,30,23,40,39,40,70,80,100,0,0,0,0]
                               , "Forecast": [0,0,0,0,0,0,0,0,0,0,0,90,30,20,15]
                               })
-#customer_data["# customer"] = customer_data["Customers"].where(~customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-#customer_data["Forecast"] = customer_data["Customers"].where(customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-#customer_data.drop(columns=["Customers"], inplace=True)
+time_order = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
+customer_data["Time"] = pd.Categorical(customer_data["Time"], categories=time_order, ordered=True)
+customer_data = customer_data.sort_values("Time")
 
 product_data = pd.DataFrame({
         "Items": ["Banana", "Milk", "Chocolate", "Cheese"],
