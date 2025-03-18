@@ -57,7 +57,7 @@ target_waiting_time = 6
 c1, c2 = st.columns([3,2])#use list for ratio
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
-    st.bar_chart(time_data, x="Time", y="Waiting Time", height = 220)   
+    st.bar_chart(time_data, height = 220)   
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(time_data["Time"], time_data["Waiting Time"])
     #ax.set_xlabel("Time")
