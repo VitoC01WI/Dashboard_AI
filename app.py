@@ -34,7 +34,7 @@ col3.metric("Opened cash desks", "2 of 5", border=True)
 time_data = pd.DataFrame({
     "Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"],
     "Average waiting time": [1,2,2,4,3,6,6,6,10,11,14,0,0,0,0],
-    "Forecas": [0,0,0,0,0,0,0,0,0,0,0,13,15,6,3]
+    "Forecast": [0,0,0,0,0,0,0,0,0,0,0,13,15,6,3]
 })
 #this code will sort the time in order, if x axis is numerical, this should not be necessary
 time_order = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
@@ -71,7 +71,7 @@ with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
     st.bar_chart(time_data,x='Time', height = 220,color = ["#1f77b4", "#ff7f0e"])   
     fig, ax = plt.subplots()
-    ax.bar(time_data['Time'], time_data['Value'], color=["#1f77b4", "#ff7f0e"])
+    ax.bar(time_data['Time'], time_data['Forecast'])
     ax.axhline(y=6, color='r', linestyle='--')  # Horizontal line at y = 6
 
     # Display the modified plot with the horizontal line
