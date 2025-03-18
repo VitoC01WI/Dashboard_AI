@@ -29,13 +29,14 @@ df = fnc.get_data()
 #dummy data
 time_data = pd.DataFrame({
     "Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"],
-    "Waiting Time": [1,2,2,4,3,6,6,6,10,11,14,13,15,6,3]
+    "Average waiting time (in min) at cash desk": [1,2,2,4,3,6,6,6,10,11,14,0,0,0,0],
+    "Forecas": [0,0,0,0,0,0,0,0,0,0,0,13,15,6,3]
 })
 
 # separate data and forecast for plotting
-time_data["Average waiting time (in min) at cash desk"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-time_data["Forecast"] = time_data["Waiting Time"].where(time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
-time_data.drop(columns=["Waiting Time"], inplace=True)
+#time_data["Average waiting time (in min) at cash desk"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+#time_data["Forecast"] = time_data["Waiting Time"].where(time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+#time_data.drop(columns=["Waiting Time"], inplace=True)
 
 
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
