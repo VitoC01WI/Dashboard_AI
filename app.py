@@ -40,9 +40,9 @@ time_data.drop(columns=["Waiting Time"], inplace=True)
 
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
                            , "Sales": [280.000, 350.000, 370.000, 400.000, 350.000, 330.000, 220.000, 250.000, 320.000]})
-sales_data["Sales 2024"] = sales_data["Waiting Time"].where(~sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
-sales_data["Sales forecast 2024"] = sales_data["Waiting Time"].where(sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
-sales_data.drop(columns=["Waiting Time"], inplace=True)
+sales_data["Sales 2024"] = sales_data["Sales"].where(~sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
+sales_data["Sales forecast 2024"] = sales_data["Sales"].where(sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
+sales_data.drop(columns=["Sales"], inplace=True)
 
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
                               , "Customers": [10,12,17,30,23,40,39,40,70,80,100,90,30,20,15]})
