@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from openai import OpenAI
 from pathlib import Path
 from datetime import datetime
-import comp
 import functool as fnc
 import numpy as np
 
@@ -22,7 +21,11 @@ st.set_page_config(
 #dummy time
 st.markdown(f"**Today: 30 May 2024, 6:15pm**", unsafe_allow_html=True)
 # making the top row of metrics
-comp.metric_row()
+
+col1, col2, col3 = st.columns(3)
+col1.metric("1 more lane reduces waiting time at cash desk by", "4 min", border=True)
+col2.metric("Free colleagues for cash desk", "2", border=True)
+col3.metric("Opened cash desks", "2 of 5", border=True)
 
 # load data
 #df = fnc.get_data(data_filename="movies.csv")
@@ -167,11 +170,6 @@ st.markdown("GPT Chat Recommender")
 openai_api_key = st.secrets["api_key"]
 
 client = OpenAI(api_key=openai_api_key)
-
-# File uploader for document
-uploaded_file = st.file_uploader(
-    "Upload a document (.txt or .md)", type=("txt", "md")
-)
 
 # Text area for user's question
 question = st.text_area(
