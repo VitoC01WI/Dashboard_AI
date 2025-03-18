@@ -70,7 +70,12 @@ c1, c2 = st.columns([3,2])#use list for ratio, 3,2 will make 2 columns with rati
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
     st.bar_chart(time_data,x='Time', height = 220,color = ["#1f77b4", "#ff7f0e"])   
+    fig, ax = plt.subplots()
+    ax.bar(time_data['Time'], time_data['Value'], color=["#1f77b4", "#ff7f0e"])
+    ax.axhline(y=6, color='r', linestyle='--')  # Horizontal line at y = 6
 
+    # Display the modified plot with the horizontal line
+    st.pyplot(fig)
 with c2.container(height=260):
     st.markdown("Product Sales and Forecast")
     st.line_chart(sales_data, x="Month", height = 220,color = ["#1f77b4", "#ff7f0e"])
