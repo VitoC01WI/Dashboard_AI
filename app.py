@@ -42,8 +42,8 @@ sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "
                            "Sales forecast 2024": [0, 0, 0, 0, 350.000, 330.000, 220.000, 250.000, 320.000]
                            })
 time_order = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
-sales_data["Time"] = pd.Categorical(sales_data["Time"], categories=time_order, ordered=True)
-sales_data = sales_data.sort_values("Time")
+sales_data["Month"] = pd.Categorical(sales_data["Month"], categories=time_order, ordered=True)
+sales_data = sales_data.sort_values("Month")
 
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
                               , "# customers": [10,12,17,30,23,40,39,40,70,80,100,0,0,0,0]
