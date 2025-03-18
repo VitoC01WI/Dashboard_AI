@@ -13,12 +13,13 @@ import functool as fnc
 st.set_page_config(
     page_title="Interactive Dashboards with GPT Chat",
     layout="wide",
-    #page_icon="🤖",
 )
 
 # date time header
-st.markdown(f"**Today:** {datetime.now().strftime('%d %B %Y, %I:%M%p')}", unsafe_allow_html=True)
-
+#this code will get the actual time
+#st.markdown(f"**Today:** {datetime.now().strftime('%d %B %Y, %I:%M%p')}", unsafe_allow_html=True)
+#dummy time
+st.markdown(f"**Today: 30 May 2024, 6:15pm**", unsafe_allow_html=True)
 # formating layout
 comp.metric_row()
 
@@ -27,17 +28,18 @@ df = fnc.get_data()
 
 #dummy data
 time_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
-                          , "Waiting Time": [2, 3, 2, 3, 4, 5, 7, 6, 5, 9, 12, 14, 10, 5, 3]})
+                          , "Waiting Time": [1,2,2,4,3,6,6,6,10,11,14,13,15,6,3]})
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
-                           , "Sales": [300000, 350000, 400000, 380000, 370000, 250000, 200000, 180000, 150000]})
+                           , "Sales": [280.000, 350.000, 370.000, 400.000, 350.000, 330.000, 220.000, 250.000, 320.000]})
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
-                              , "Customers": [5, 7, 10, 15, 20, 25, 35, 40, 50, 70, 100, 120, 80, 40, 20]})
+                              , "Customers": [10,12,17,30,23,40,39,40,70,80,100,90,30,20,15]})
 product_data = pd.DataFrame({
         "Items": ["Banana", "Milk", "Chocolate", "Cheese"],
         "Apr 2024": [6000, 9300, 4600, 9500],
         "May 2024": [6200, 9200, 4500, 9700],
         "Sales Target May 2024": [6000, 10000, 4800, 9500]
     })
+target_waiting_time = 6
 
 #row 2
 c1, c2 = st.columns([3,2])#use list for ratio
