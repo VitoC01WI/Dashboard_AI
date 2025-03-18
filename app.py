@@ -27,24 +27,29 @@ comp.metric_row()
 df = fnc.get_data()
 
 #dummy data
-#time_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
-#                          , "Waiting Time": [1,2,2,4,3,6,6,6,10,11,14,13,15,6,3]})
-#time_data["Category"] = ["data" if t not in ["7 pm", "8 pm", "9 pm", "10 pm"] else "forecast" for t in time_data["Time"]]
 time_data = pd.DataFrame({
     "Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"],
     "Waiting Time": [1,2,2,4,3,6,6,6,10,11,14,13,15,6,3]
 })
 
-# Transform data into separate columns for "Data" and "Forecast"
-time_data["Data"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+# separate data and forecast for plotting
+time_data["Average waiting time (in min) at cash desk"] = time_data["Waiting Time"].where(~time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
 time_data["Forecast"] = time_data["Waiting Time"].where(time_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
 time_data.drop(columns=["Waiting Time"], inplace=True)
 
 
 sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
                            , "Sales": [280.000, 350.000, 370.000, 400.000, 350.000, 330.000, 220.000, 250.000, 320.000]})
+sales_data["Sales 2024"] = sales_data["Waiting Time"].where(~sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
+sales_data["Sales forecast 2024"] = sales_data["Waiting Time"].where(sales_data["Time"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
+sales_data.drop(columns=["Waiting Time"], inplace=True)
+
 customer_data = pd.DataFrame({"Time": ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm"]
                               , "Customers": [10,12,17,30,23,40,39,40,70,80,100,90,30,20,15]})
+customer_data["# customer"] = customer_data["Customers"].where(~customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+customer_data["Forecast"] = customer_data["Customers"].where(customer_data["Time"].isin(["7 pm", "8 pm", "9 pm", "10 pm"]))
+customer_data.drop(columns=["Customers"], inplace=True)
+
 product_data = pd.DataFrame({
         "Items": ["Banana", "Milk", "Chocolate", "Cheese"],
         "Apr 2024": [6000, 9300, 4600, 9500],
@@ -57,7 +62,7 @@ target_waiting_time = 6
 c1, c2 = st.columns([3,2])#use list for ratio
 with c1.container(height=260):
     st.markdown("Waiting time (in min) at cash desk")
-    st.bar_chart(time_data, height = 220)   
+    st.bar_chart(time_data,x='Time', height = 220)   
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(time_data["Time"], time_data["Waiting Time"])
     #ax.set_xlabel("Time")
@@ -65,7 +70,7 @@ with c1.container(height=260):
     #st.pyplot(fig)
 with c2.container(height=260):
     st.markdown("Product Sales and Forecast")
-    st.line_chart(sales_data, x="Month", y="Sales", height = 220)
+    st.line_chart(sales_data, x="Month", height = 220)
     #fig, ax = plt.subplots() 
     #ax.plot(sales_data["Month"], sales_data["Sales"], marker='o')
     #ax.set_xlabel("Month")
@@ -77,7 +82,7 @@ with c2.container(height=260):
 c3, c4 = st.columns([3,2])
 with c3.container(height=260):
     st.markdown("Customers per Day")
-    st.bar_chart(customer_data, x="Time", y="Customers", height = 220)
+    st.bar_chart(customer_data, x="Time", height = 220)
     #fig, ax = plt.subplots(figsize=(10, 4))  # Define aspect ratio
     #ax.bar(customer_data["Time"], customer_data["Customers"])
     #ax.set_xlabel("Time")
