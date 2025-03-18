@@ -39,8 +39,10 @@ time_data = pd.DataFrame({
 #time_data.drop(columns=["Waiting Time"], inplace=True)
 
 
-sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
-                           , "Sales": [280.000, 350.000, 370.000, 400.000, 350.000, 330.000, 220.000, 250.000, 320.000]})
+sales_data = pd.DataFrame({"Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                           "Sales 2024": [280.000, 350.000, 370.000, 400.000, 0, 0, 0, 0, 0],
+                           "Sales forecast 2024": [0, 0, 0, 0, 350.000, 330.000, 220.000, 250.000, 320.000]
+                           })
 sales_data["Sales 2024"] = sales_data["Sales"].where(~sales_data["Month"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
 sales_data["Sales forecast 2024"] = sales_data["Sales"].where(sales_data["Month"].isin(["May", "Jun", "Jul", "Aug", "Sep"]))
 sales_data.drop(columns=["Sales"], inplace=True)
